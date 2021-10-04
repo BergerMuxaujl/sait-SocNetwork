@@ -1,3 +1,6 @@
+a {
+    text-decoration: none;
+}
 .app-wrapper {
     margin: 0 auto;
     display: grid;

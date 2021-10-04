@@ -1,0 +1,33 @@
+.titlePost {
+    text-align: center;
+    color: black;
+    text-decoration: underline;
+}
+
+.postOuter {
+    border: 1px solid whitesmoke;
+    border-radius: 5px;
+    padding: 5px;
+    overflow: auto;
+    padding: 10px;
+}
+.postInner {
+    overflow: auto;
+}
+.avaBox {
+    float: left;
+    width: auto;
+    height: auto;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.ava {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-position: center;
+    object-fit: cover;
+}
+.textPost {
+    color: grey;
+}

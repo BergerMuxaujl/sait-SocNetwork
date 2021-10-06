@@ -1,0 +1,14 @@
+.myposts {
+    padding: 10px;
+}
+textarea {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 100%;
+    min-height: 50px;
+}
+.buttonSendBox {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}

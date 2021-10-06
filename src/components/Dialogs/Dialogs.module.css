@@ -1,16 +1,18 @@
 .dialogs {
     display: flex;
     background-color: cornsilk;
+    height: 100%;
 }
 .dialogsItem {
     width: 50%;
     padding: 10px;
+    border-right: 2px solid darkblue;
 }
 .dialog {
     color: grey;
     padding: 4px;
 }
-.dialog.active {
+.dialog .active {
     color: black;
     text-decoration: underline;
     background-color: rgb(174, 198, 245);

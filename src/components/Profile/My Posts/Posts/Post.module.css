@@ -1,7 +1,12 @@
+.post {
+    margin-bottom: 15px;
+}
 .titlePost {
+    font-size: 18px;
     text-align: center;
     color: black;
     text-decoration: underline;
+    margin-bottom: 5px;
 }
 
 .postOuter {
@@ -30,4 +35,7 @@
 }
 .textPost {
     color: grey;
+}
+.like {
+    padding-left: 18px;
 }

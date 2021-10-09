@@ -1,10 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import state from "./redux/state";
-import { renderedEntireTree } from "./render";
+import state, { subscribe } from "./redux/state";
+import App from "./App";
+import { addPost, updatePost } from "./redux/state";
+import "./index.css";
+
+let renderedEntireTree = (state) => {
+    ReactDOM.render(<App appState={state} addPost={addPost} updatePost={updatePost} />, document.getElementById("root"));
+};
 
 renderedEntireTree(state);
+
+subscribe(renderedEntireTree);
 
 reportWebVitals();

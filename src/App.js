@@ -6,17 +6,15 @@ import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 
-const App = () => {
+const App = (props) => {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header />
                 <Navbar />
                 <div className="app-wrapper-content">
-                    <Route path="/dialogs" component={Dialogs} />
-                    <Route path="/profile" component={Profile} />
-                    {/* <Dialogs /> */}
-                    {/* <Profile /> */}
+                    <Route path="/dialogs" render={() => <Dialogs dialogsData={props.appState.dialogsData} messageData={props.appState.messageData} />} />
+                    <Route path="/profile" render={() => <Profile postData={props.appState.postData} addPost={props.addPost} />} />
                 </div>
             </div>
         </BrowserRouter>

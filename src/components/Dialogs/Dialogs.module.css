@@ -1,12 +1,12 @@
 .dialogs {
     display: flex;
     background-color: cornsilk;
-    height: 100%;
 }
-.dialogsItem {
-    width: 50%;
+.dialogsSide {
+    width: 200px;
     padding: 10px;
     border-right: 2px solid darkblue;
+    box-sizing: border-box;
 }
 .dialog {
     color: grey;
@@ -19,9 +19,23 @@
     border: 1px solid rosybrown;
     border-radius: 6px;
 }
-.messages {
-    width: 50%;
+.messagesSide {
+    width: calc(100% - 200px);
     padding: 10px;
+    box-sizing: border-box;
 }
-.massage {
+.messagesBox {
+    padding: 10px;
+    background-color: rgb(240, 186, 147);
+    border-radius: 10px;
+}
+.butSend {
+    display: flex;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: 0px;
+    background-color: seagreen;
+    color: white;
+    font-size: 16px;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }

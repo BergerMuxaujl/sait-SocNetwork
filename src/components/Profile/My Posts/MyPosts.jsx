@@ -1,7 +1,6 @@
 import React from "react";
 import Post from "./Posts/Post";
 import s from "./MyPosts.module.css";
-import { updatePost } from "../../../redux/state";
 
 const MyPosts = (props) => {
     let postElements = props.posts.map((el) => {
@@ -12,7 +11,7 @@ const MyPosts = (props) => {
 
     let localAddPost = () => {
         let txt = refTBox.current.value;
-        props.addPost(txt);
+        props.addPost();
         props.updatePost("");
     };
 

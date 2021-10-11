@@ -1,7 +1,7 @@
 .myposts {
     padding: 10px;
 }
-textarea {
+textarea.newpostText {
     box-sizing: border-box;
     width: 100%;
     min-width: 100%;

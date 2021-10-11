@@ -1,3 +1,6 @@
+const ADD_POST = "ADD-POST";
+const UPDATE_NEWPOST = "UPDATE-NEWPOST";
+
 let store = {
     _state: {
         dialogsPage: {
@@ -62,5 +65,8 @@ let store = {
         }
     },
 };
+
+export const AddPostActionCreator = () => ({ type: ADD_POST });
+export const UpdateNewpostActionCreator = (text) => ({ type: UPDATE_NEWPOST, txt: text });
 
 export default store;

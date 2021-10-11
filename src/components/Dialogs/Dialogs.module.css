@@ -29,11 +29,26 @@
     background-color: rgb(240, 186, 147);
     border-radius: 10px;
 }
-.butSend {
+.sendContainer {
     display: flex;
+    flex-direction: row;
+    width: 100%;
+    box-sizing: border-box;
     margin-top: 10px;
-    margin-left: auto;
-    margin-right: 0px;
+}
+.tBoxSend {
+    box-sizing: border-box;
+    width: 100%;
+    height: 28px;
+    padding: 5px;
+    resize: none;
+    font-weight: 100;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.butSend {
+    /* display: inline-block; */
+    margin-left: 10px;
     background-color: seagreen;
     color: white;
     font-size: 16px;

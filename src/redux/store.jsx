@@ -36,32 +36,31 @@ let store = {
             newPostText: "default text post",
         },
     },
-
-    getState() {
-        return this._state;
-    },
-
     _callSubscriber() {
         console.log("this is call subscriber");
     },
 
-    addPost() {
-        this._state.profilePage.posts.push({
-            id: this._state.profilePage.posts.length + 1,
-            Title: "New post",
-            likes: 0,
-            text: this._state.profilePage.newPostText,
-        });
-        this._callSubscriber(this._state);
+    getState() {
+        return this._state;
     },
-
-    updatePost(txt) {
-        this._state.profilePage.newPostText = txt;
-        this._callSubscriber(this._state);
-    },
-
     subscribe(observer) {
         this._callSubscriber = observer;
     },
+
+    dispatch(action) {
+        if (action.type === "ADD-POST") {
+            this._state.profilePage.posts.push({
+                id: this._state.profilePage.posts.length + 1,
+                Title: "New post",
+                likes: 0,
+                text: this._state.profilePage.newPostText,
+            });
+            this._callSubscriber(this._state);
+        } else if (action.type === "UPDATE-NEWPOST") {
+            this._state.profilePage.newPostText = action.txt;
+            this._callSubscriber(this._state);
+        }
+    },
 };
+
 export default store;

@@ -1,7 +1,7 @@
 import React, { StrictMode } from "react";
 import Post from "./Posts/Post";
 import s from "./MyPosts.module.css";
-import { AddPostActionCreator, UpdateNewpostActionCreator } from "../../../redux/store";
+import { AddPostCreator, UpdateNewpostCreator } from "../../../redux/profile-Reducer";
 
 const MyPosts = (props) => {
     let postElements = props.posts.map((el) => {
@@ -11,12 +11,11 @@ const MyPosts = (props) => {
     let refTBox = React.createRef();
 
     let localAddPost = () => {
-        props.dispatch(AddPostActionCreator());
-        props.dispatch(UpdateNewpostActionCreator(refTBox.current.value));
+        props.dispatch(AddPostCreator());
     };
 
     let localUpdateNewPost = () => {
-        props.dispatch(UpdateNewpostActionCreator(refTBox.current.value));
+        props.dispatch(UpdateNewpostCreator(refTBox.current.value));
     };
 
     return (

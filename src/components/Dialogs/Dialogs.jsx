@@ -1,5 +1,4 @@
 import React from "react";
-import { SendNewMessageCreator, UpdateNewMessageCreator } from "../../redux/dialogs-Reducer";
 import Dialog from "./Dialog/Dialog";
 import s from "./Dialogs.module.css";
 import Message from "./Message/Message";
@@ -13,7 +12,7 @@ const Dialogs = (props) => {
         return <Message message={el.message} />;
     });
 
-    let localUpdateMessageBox = (e) => {
+    let onUpdateMessageBox = (e) => {
         let el = document.getElementById("123");
         console.log(el.scrollHeight);
         if (el.scrollHeight > 28) {
@@ -21,12 +20,11 @@ const Dialogs = (props) => {
         } else {
             el.style.height = "28px";
         }
-
-        props.dispatch(UpdateNewMessageCreator(e.target.value));
+        props.updateNewMessage(e.target.value);
     };
 
-    let localSendMessage = () => {
-        props.dispatch(SendNewMessageCreator());
+    let onSendMessage = () => {
+        props.sendMessage();
     };
 
     return (
@@ -35,8 +33,8 @@ const Dialogs = (props) => {
             <div className={s.messagesSide}>
                 <div className={s.messagesBox}>{messageElements}</div>
                 <div className={s.sendContainer}>
-                    <textarea onChange={localUpdateMessageBox} className={s.tBoxSend} id="123" value={props.dialogsPage.newMessageText}></textarea>
-                    <button onClick={localSendMessage} className={s.butSend}>
+                    <textarea onChange={onUpdateMessageBox} className={s.tBoxSend} id="123" value={props.dialogsPage.newMessageText}></textarea>
+                    <button onClick={onSendMessage} className={s.butSend}>
                         Send
                     </button>
                 </div>

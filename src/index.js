@@ -4,9 +4,18 @@ import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store-redux";
 import App from "./App";
 import "./index.css";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 
 let renderedEntireTree = () => {
-    ReactDOM.render(<App store={store} />, document.getElementById("root"));
+    ReactDOM.render(
+        <BrowserRouter>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </BrowserRouter>,
+        document.getElementById("root")
+    );
 };
 
 renderedEntireTree();

@@ -7,19 +7,13 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 
-let renderedEntireTree = () => {
-    ReactDOM.render(
-        <BrowserRouter>
-            <Provider store={store}>
-                <App />
-            </Provider>
-        </BrowserRouter>,
-        document.getElementById("root")
-    );
-};
-
-renderedEntireTree();
-
-store.subscribe(renderedEntireTree);
+ReactDOM.render(
+    <BrowserRouter>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </BrowserRouter>,
+    document.getElementById("root")
+);
 
 reportWebVitals();

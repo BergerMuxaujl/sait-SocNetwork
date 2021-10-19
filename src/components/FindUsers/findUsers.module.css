@@ -1,0 +1,65 @@
+.wrapperUsers {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.wrapperUser {
+    display: flex;
+    width: 100%;
+    margin-bottom: 40px;
+}
+.ava {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+}
+.avaImg {
+    width: 100%;
+}
+.avaWrapper {
+    justify-content: center;
+}
+.followBox {
+    margin-top: 10px;
+    text-align: center;
+}
+.butFol {
+    width: 90px;
+    height: 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 12px;
+    font-family: monospace;
+    font-weight: 800;
+}
+.follow {
+    background-color: rgb(8, 236, 149);
+}
+.unfollow {
+    background-color: rgb(8, 171, 236);
+}
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    border: 1px solid rgb(16, 167, 194);
+    border-radius: 8px;
+    padding: 10px;
+    margin-left: 15px;
+}
+
+.fullName {
+    font-size: 24px;
+    font-weight: 500;
+}
+.firstName {
+    margin-right: 5px;
+}
+
+.location {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgb(78, 76, 76);
+}

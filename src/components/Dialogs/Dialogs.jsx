@@ -14,7 +14,6 @@ const Dialogs = (props) => {
 
     let onUpdateMessageBox = (e) => {
         let el = document.getElementById("123");
-        console.log(el.scrollHeight);
         if (el.scrollHeight > 28) {
             el.style.height = `${el.scrollHeight}px`;
         } else {

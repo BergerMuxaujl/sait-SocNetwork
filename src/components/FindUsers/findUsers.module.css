@@ -63,3 +63,12 @@
     font-weight: 300;
     color: rgb(78, 76, 76);
 }
+
+.pageButton {
+    color: grey;
+    margin-right: 5px;
+}
+.pageButtonCurrent.pageButton {
+    color: red;
+    font-weight: bold;
+}

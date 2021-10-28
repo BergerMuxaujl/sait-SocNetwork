@@ -4,3 +4,36 @@
     object-fit: cover;
     object-position: center;
 }
+
+.userWrapper {
+    display: flex;
+    margin-top: 10px;
+}
+
+.userAva {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.userInfo {
+    margin-left: 20px;
+}
+
+.fullName {
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.aboutMe {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 14px;
+    color: rgb(54, 54, 54);
+    text-decoration: underline;
+}
+.aboutMeContent {
+    margin-left: 5px;
+    font-size: 14px;
+}

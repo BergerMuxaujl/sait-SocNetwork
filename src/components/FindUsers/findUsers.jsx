@@ -1,6 +1,7 @@
 import s from "./findUsers.module.css";
 import image from "../../accets/fake-ava.png";
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const FindUsers = (props) => {
     let countPages = Math.ceil(props.totalUsersCount / props.countUsersPage);
@@ -30,7 +31,9 @@ const FindUsers = (props) => {
                 <div key={user.id} className={s.wrapperUser}>
                     <div className={s.avaWrapper}>
                         <div className={s.ava}>
-                            <img src={user.ava || image} alt="ava" className={s.avaImg} />
+                            <NavLink to={"/profile/" + user.id}>
+                                <img src={user.ava || image} alt="ava" className={s.avaImg} />
+                            </NavLink>
                         </div>
                         <div className={s.followBox}>
                             {user.followed ? (

@@ -8,20 +8,28 @@ import Preloader from "./preloader";
 
 class FindUsersAPIComponent extends React.Component {
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.countUsersPage}`).then((response) => {
-            this.props.setUsers(response.data.items);
-            this.props.setTotalUsersCount(response.data.totalCount);
-            this.props.togleFetching(false);
-        });
+        axios
+            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.countUsersPage}`, {
+                withCredentials: true,
+            })
+            .then((response) => {
+                this.props.setUsers(response.data.items);
+                this.props.setTotalUsersCount(response.data.totalCount);
+                this.props.togleFetching(false);
+            });
     }
 
     onPageChanged = (num) => {
         this.props.togleFetching(true);
         this.props.setCurrentPage(num);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.countUsersPage}`).then((response) => {
-            this.props.setUsers(response.data.items);
-            this.props.togleFetching(false);
-        });
+        axios
+            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.countUsersPage}`, {
+                withCredentials: true,
+            })
+            .then((response) => {
+                this.props.setUsers(response.data.items);
+                this.props.togleFetching(false);
+            });
     };
 
     render() {

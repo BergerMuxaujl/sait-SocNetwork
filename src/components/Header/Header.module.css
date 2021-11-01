@@ -2,6 +2,8 @@
     display: flex;
     grid-area: h;
     background-color: grey;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .header .logoWrapper {
@@ -14,4 +16,10 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
+}
+.login {
+    color: white;
+}
+.loginWrap {
+    margin-right: 40px;
 }

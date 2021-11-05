@@ -1,35 +1,26 @@
 import { connect } from "react-redux";
-import { follow, setCurrentPage, setTotalUsersCount, setUsers, togleFetching, unfollow } from "./../../redux/findusers-Reducer";
+import { follow, setCurrentPage, setTotalUsersCount, setUsers, togleFetching, unfollow, togleFollow } from "./../../redux/findusers-Reducer";
 import FindUsers from "./findUsers";
-import * as axios from "axios";
 import React from "react";
-
 import Preloader from "./preloader";
+import { usersAPI } from "../../api/api";
 
 class FindUsersAPIComponent extends React.Component {
     componentDidMount() {
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.countUsersPage}`, {
-                withCredentials: true,
-            })
-            .then((response) => {
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUsersCount(response.data.totalCount);
-                this.props.togleFetching(false);
-            });
+        usersAPI.getUsers(this.props.currentPage, this.props.countUsersPage).then((response) => {
+            this.props.setUsers(response.items);
+            this.props.setTotalUsersCount(response.totalCount);
+            this.props.togleFetching(false);
+        });
     }
 
     onPageChanged = (num) => {
         this.props.togleFetching(true);
         this.props.setCurrentPage(num);
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.countUsersPage}`, {
-                withCredentials: true,
-            })
-            .then((response) => {
-                this.props.setUsers(response.data.items);
-                this.props.togleFetching(false);
-            });
+        usersAPI.getUsers(this.props.currentPage, this.props.countUsersPage).then((response) => {
+            this.props.setUsers(response.items);
+            this.props.togleFetching(false);
+        });
     };
 
     render() {
@@ -46,13 +37,13 @@ class FindUsersAPIComponent extends React.Component {
                         users={this.props.users}
                         unfollow={this.props.unfollow}
                         follow={this.props.follow}
+                        togleFollow={this.props.togleFollow}
+                        followButtons={this.props.followButtons}
                     />
                 )}
             </>
         );
     }
-}
-{
 }
 
 let mapStateToProps = (state) => {
@@ -62,6 +53,7 @@ let mapStateToProps = (state) => {
         countUsersPage: state.findusersPage.countUsersPage,
         currentPage: state.findusersPage.currentPage,
         isFetching: state.findusersPage.isFetching,
+        followButtons: state.findusersPage.followButtons,
     };
 };
 
@@ -72,6 +64,7 @@ const FindUsersContainer = connect(mapStateToProps, {
     setTotalUsersCount,
     setCurrentPage,
     togleFetching,
+    togleFollow,
 })(FindUsersAPIComponent);
 
 export default FindUsersContainer;

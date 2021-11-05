@@ -4,6 +4,7 @@ const setUsersAT = "SET_USERS";
 const setTotalUsersCountAT = "SET_TOTAL_USERS_COUNT";
 const setCurrentPageAT = "SET_CURRENT_PAGE";
 const togleFetchingAT = "SET_TOOGLE_FETHING";
+const togleFollowAT = "TOGLE_ FOLLOW";
 
 let initialState = {
     users: [],
@@ -11,6 +12,7 @@ let initialState = {
     totalUsersCount: 1,
     currentPage: 1,
     isFetching: true,
+    followButtons: [],
 };
 
 let findUsersReducer = (state = initialState, action) => {
@@ -39,6 +41,12 @@ let findUsersReducer = (state = initialState, action) => {
         case togleFetchingAT: {
             return { ...state, isFetching: action.isFetching };
         }
+        case togleFollowAT: {
+            return {
+                ...state,
+                followButtons: action.isFetching ? [state.followButtons.filter((id) => id != action.userId)] : [...state.followButtons, action.userId],
+            };
+        }
         default:
             return state;
     }
@@ -50,5 +58,6 @@ export let setUsers = (users) => ({ type: setUsersAT, users: users });
 export let setTotalUsersCount = (totalUsersCount) => ({ type: setTotalUsersCountAT, totalUsersCount: totalUsersCount });
 export let setCurrentPage = (currentPage) => ({ type: setCurrentPageAT, currentPage: currentPage });
 export let togleFetching = (isFetching) => ({ type: togleFetchingAT, isFetching: isFetching });
+export let togleFollow = (isFetching, userId) => ({ type: togleFollowAT, isFetching: isFetching, userId: userId });
 
 export default findUsersReducer;

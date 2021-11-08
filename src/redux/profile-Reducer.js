@@ -1,3 +1,5 @@
+import { profileAPI } from "../api/api";
+
 const ADD_POST_TA = "ADD-POST";
 const UPDATE_NEWPOST_TA = "UPDATE-NEWPOST";
 const SET_USER_PROFILE_TA = "SET-USER-PROFILE";
@@ -64,5 +66,13 @@ export const UpdateNewpostCreator = (text) => ({
     txt: text,
 });
 export const setUserProfile = (userProfile) => ({ type: SET_USER_PROFILE_TA, userProfile: userProfile });
+
+export const getUserProfile = (userId) => {
+    return (dispatch) => {
+        profileAPI.getUserProfile(userId).then((response) => {
+            dispatch(setUserProfile(response));
+        });
+    };
+};
 
 export default profileReducer;

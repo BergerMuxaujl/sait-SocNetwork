@@ -1,29 +1,23 @@
 import { connect } from "react-redux";
-import { follow, setCurrentPage, setTotalUsersCount, setUsers, togleFetching, unfollow, togleFollow } from "./../../redux/findusers-Reducer";
+import { follow, setCurrentPage, setTotalUsersCount, setUsers, togleFetching, unfollow, togleFollow, getUsers } from "./../../redux/findusers-Reducer";
 import FindUsers from "./findUsers";
 import React from "react";
 import Preloader from "./preloader";
 import { usersAPI } from "../../api/api";
+import { Redirect } from "react-router";
 
 class FindUsersAPIComponent extends React.Component {
     componentDidMount() {
-        usersAPI.getUsers(this.props.currentPage, this.props.countUsersPage).then((response) => {
-            this.props.setUsers(response.items);
-            this.props.setTotalUsersCount(response.totalCount);
-            this.props.togleFetching(false);
-        });
+        this.props.getUsers(this.props.currentPage, this.props.countUsersPage);
     }
 
-    onPageChanged = (num) => {
-        this.props.togleFetching(true);
-        this.props.setCurrentPage(num);
-        usersAPI.getUsers(this.props.currentPage, this.props.countUsersPage).then((response) => {
-            this.props.setUsers(response.items);
-            this.props.togleFetching(false);
-        });
+    onPageChanged = (numPage) => {
+        this.props.getUsers(numPage, this.props.countUsersPage);
     };
 
     render() {
+        if (!this.props.isAuth) return <Redirect to="./login" />;
+
         return (
             <>
                 {this.props.isFetching ? (
@@ -54,6 +48,7 @@ let mapStateToProps = (state) => {
         currentPage: state.findusersPage.currentPage,
         isFetching: state.findusersPage.isFetching,
         followButtons: state.findusersPage.followButtons,
+        isAuth: state.auth.isAuth,
     };
 };
 
@@ -65,6 +60,7 @@ const FindUsersContainer = connect(mapStateToProps, {
     setCurrentPage,
     togleFetching,
     togleFollow,
+    getUsers,
 })(FindUsersAPIComponent);
 
 export default FindUsersContainer;

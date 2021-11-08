@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api";
+
 const followAT = "FOLLOW";
 const unfollowAT = "UNFOLLOW";
 const setUsersAT = "SET_USERS";
@@ -44,7 +46,7 @@ let findUsersReducer = (state = initialState, action) => {
         case togleFollowAT: {
             return {
                 ...state,
-                followButtons: action.isFetching ? [state.followButtons.filter((id) => id != action.userId)] : [...state.followButtons, action.userId],
+                followButtons: action.isFetching ? [state.followButtons.filter((id) => ~id != action.userId)] : [...state.followButtons, action.userId],
             };
         }
         default:
@@ -52,12 +54,48 @@ let findUsersReducer = (state = initialState, action) => {
     }
 };
 
-export let follow = (userId) => ({ type: followAT, userId: userId });
-export let unfollow = (userId) => ({ type: unfollowAT, userId: userId });
+export let acceptfollow = (userId) => ({ type: followAT, userId: userId });
+export let acceptUnfollow = (userId) => ({ type: unfollowAT, userId: userId });
 export let setUsers = (users) => ({ type: setUsersAT, users: users });
 export let setTotalUsersCount = (totalUsersCount) => ({ type: setTotalUsersCountAT, totalUsersCount: totalUsersCount });
 export let setCurrentPage = (currentPage) => ({ type: setCurrentPageAT, currentPage: currentPage });
 export let togleFetching = (isFetching) => ({ type: togleFetchingAT, isFetching: isFetching });
 export let togleFollow = (isFetching, userId) => ({ type: togleFollowAT, isFetching: isFetching, userId: userId });
+
+export let getUsers = (currentPage, countUsersPage) => {
+    return (dispatch) => {
+        dispatch(togleFetching(true));
+        usersAPI.getUsers(currentPage, countUsersPage).then((response) => {
+            dispatch(setCurrentPage(currentPage));
+            dispatch(setUsers(response.items));
+            dispatch(setTotalUsersCount(response.totalCount));
+            dispatch(togleFetching(false));
+        });
+    };
+};
+
+export let unfollow = (userId) => {
+    return (dispatch) => {
+        dispatch(togleFollow(false, userId));
+        usersAPI.unfollow(userId).then((response) => {
+            dispatch(togleFollow(true, userId));
+            if (response.resultCode === 0) {
+                dispatch(acceptUnfollow(userId));
+            }
+        });
+    };
+};
+
+export let follow = (userId) => {
+    return (dispatch) => {
+        dispatch(togleFollow(false, userId));
+        usersAPI.follow(userId).then((response) => {
+            dispatch(togleFollow(true, userId));
+            if (response.resultCode === 0) {
+                dispatch(acceptfollow(userId));
+            }
+        });
+    };
+};
 
 export default findUsersReducer;

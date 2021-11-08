@@ -1,12 +1,8 @@
 import React from "react";
 import s from "./ProfileInfo.module.css";
 import image from "../../../accets/fake-ava.png";
-import Preloader from "../../FindUsers/preloader";
 
 const ProfileInfo = (props) => {
-    if (!props.userProfile) {
-        return <Preloader />;
-    }
     return (
         <div className={s.profileInfo}>
             <div className={s.boxImg}>

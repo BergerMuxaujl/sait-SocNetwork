@@ -41,17 +41,7 @@ const FindUsers = (props) => {
                             {user.followed ? (
                                 <button
                                     disabled={props.followButtons.some((id) => id === user.id)}
-                                    onClick={() => {
-                                        props.togleFollow(false, user.id);
-
-                                        usersAPI.unfollow(user.id).then((response) => {
-                                            props.togleFollow(true, user.id);
-
-                                            if (response.resultCode === 0) {
-                                                props.unfollow(user.id);
-                                            }
-                                        });
-                                    }}
+                                    onClick={() => props.unfollow(user.id)}
                                     className={`${s.butFol} ${s.unfollow} `}
                                 >
                                     Unfollow
@@ -59,15 +49,7 @@ const FindUsers = (props) => {
                             ) : (
                                 <button
                                     disabled={props.followButtons.some((id) => id === user.id)}
-                                    onClick={() => {
-                                        props.togleFollow(false, user.id);
-                                        usersAPI.follow(user.id).then((response) => {
-                                            props.togleFollow(true, user.id);
-                                            if (response.resultCode === 0) {
-                                                props.follow(user.id);
-                                            }
-                                        });
-                                    }}
+                                    onClick={() => props.follow(user.id)}
                                     className={`${s.butFol} ${s.follow} `}
                                 >
                                     Follow

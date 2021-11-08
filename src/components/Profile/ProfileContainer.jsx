@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import Profile from "./Profile";
 import { getUserProfile } from "./../../redux/profile-Reducer";
-import { Redirect, withRouter } from "react-router";
-import { profileAPI } from "../../api/api";
+import { withRouter } from "react-router";
 import Preloader from "../FindUsers/preloader";
+import { withAuthRedirect } from "../../hoc/auth-Redirect";
 
 class ProfileAPIContainer extends React.Component {
     componentDidMount() {
@@ -13,18 +13,18 @@ class ProfileAPIContainer extends React.Component {
         this.props.getUserProfile(userId);
     }
     render() {
-        if (!this.props.isAuth) return <Redirect to="./login" />;
         return !this.props.userProfile ? <Preloader /> : <Profile {...this.props} />;
     }
 }
 
+let withAuthRedirectComponent = withAuthRedirect(ProfileAPIContainer);
+
+let withUrlDataContComponent = withRouter(withAuthRedirectComponent);
+
 let mapStateToProps = (state) => {
     return {
         userProfile: state.profilePage.userProfile,
-        isAuth: state.auth.isAuth,
     };
 };
-
-let withUrlDataContComponent = withRouter(ProfileAPIContainer);
 
 export default connect(mapStateToProps, { getUserProfile })(withUrlDataContComponent);

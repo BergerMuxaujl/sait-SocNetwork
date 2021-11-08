@@ -3,8 +3,7 @@ import { follow, setCurrentPage, setTotalUsersCount, setUsers, togleFetching, un
 import FindUsers from "./findUsers";
 import React from "react";
 import Preloader from "./preloader";
-import { usersAPI } from "../../api/api";
-import { Redirect } from "react-router";
+import { withAuthRedirect } from "../../hoc/auth-Redirect";
 
 class FindUsersAPIComponent extends React.Component {
     componentDidMount() {
@@ -16,8 +15,6 @@ class FindUsersAPIComponent extends React.Component {
     };
 
     render() {
-        if (!this.props.isAuth) return <Redirect to="./login" />;
-
         return (
             <>
                 {this.props.isFetching ? (
@@ -40,6 +37,8 @@ class FindUsersAPIComponent extends React.Component {
     }
 }
 
+let withAuthRedirectComponent = withAuthRedirect(FindUsersAPIComponent);
+
 let mapStateToProps = (state) => {
     return {
         users: state.findusersPage.users,
@@ -48,7 +47,6 @@ let mapStateToProps = (state) => {
         currentPage: state.findusersPage.currentPage,
         isFetching: state.findusersPage.isFetching,
         followButtons: state.findusersPage.followButtons,
-        isAuth: state.auth.isAuth,
     };
 };
 
@@ -61,6 +59,6 @@ const FindUsersContainer = connect(mapStateToProps, {
     togleFetching,
     togleFollow,
     getUsers,
-})(FindUsersAPIComponent);
+})(withAuthRedirectComponent);
 
 export default FindUsersContainer;

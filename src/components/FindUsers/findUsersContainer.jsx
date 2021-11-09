@@ -4,6 +4,7 @@ import FindUsers from "./findUsers";
 import React from "react";
 import Preloader from "./preloader";
 import { withAuthRedirect } from "../../hoc/auth-Redirect";
+import { compose } from "redux";
 
 class FindUsersAPIComponent extends React.Component {
     componentDidMount() {
@@ -37,8 +38,6 @@ class FindUsersAPIComponent extends React.Component {
     }
 }
 
-let withAuthRedirectComponent = withAuthRedirect(FindUsersAPIComponent);
-
 let mapStateToProps = (state) => {
     return {
         users: state.findusersPage.users,
@@ -50,15 +49,16 @@ let mapStateToProps = (state) => {
     };
 };
 
-const FindUsersContainer = connect(mapStateToProps, {
-    follow,
-    unfollow,
-    setUsers,
-    setTotalUsersCount,
-    setCurrentPage,
-    togleFetching,
-    togleFollow,
-    getUsers,
-})(withAuthRedirectComponent);
-
-export default FindUsersContainer;
+export default compose(
+    connect(mapStateToProps, {
+        follow,
+        unfollow,
+        setUsers,
+        setTotalUsersCount,
+        setCurrentPage,
+        togleFetching,
+        togleFollow,
+        getUsers,
+    }),
+    withAuthRedirect
+)(FindUsersAPIComponent);

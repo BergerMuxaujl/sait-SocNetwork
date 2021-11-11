@@ -1,16 +1,11 @@
 import React from "react";
 import s from "./ProfileInfo.module.css";
 import image from "../../../accets/fake-ava.png";
+import ProfileStatus from "./Status/ProfileStatus";
 
 const ProfileInfo = (props) => {
     return (
         <div className={s.profileInfo}>
-            <div className={s.boxImg}>
-                <img
-                    className={s.mainImage}
-                    src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                ></img>
-            </div>
             <div className={s.userWrapper}>
                 <img src={props.userProfile.photos.small || image} alt="ava" className={s.userAva} />
                 <div className={s.userInfo}>
@@ -19,6 +14,7 @@ const ProfileInfo = (props) => {
                     <span className={s.aboutMeContent}>{props.userProfile.aboutMe}</span>
                 </div>
             </div>
+            <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus} />
         </div>
     );
 };

@@ -1,0 +1,12 @@
+.statusBox {
+    margin-top: 10px;
+}
+
+.statusSpan {
+    font-size: 14px;
+    color: rgb(87, 87, 87);
+}
+
+.statusInput {
+    font-size: 16px;
+}

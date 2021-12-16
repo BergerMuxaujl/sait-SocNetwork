@@ -1,7 +1,6 @@
 import { profileAPI } from "../api/api";
 
 const ADD_POST_TA = "ADD-POST";
-const UPDATE_NEWPOST_TA = "UPDATE-NEWPOST";
 const SET_USER_PROFILE_TA = "SET-USER-PROFILE";
 const SET_USER_STATUS = "SET-USER-STATUS";
 
@@ -26,7 +25,6 @@ let initialState = {
             text: "This is text at third post. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur obcaecati quibusdam ex eum ut minima molestias est adipisci excepturi consequatur? Ipsam aut dicta autem dignissimos, nihil facere consequatur aperiam delectus.",
         },
     ],
-    newPostText: "default text post",
     userProfile: null,
     status: "",
 };
@@ -42,7 +40,7 @@ const profileReducer = (state = initialState, action) => {
                         id: state.posts.length + 1,
                         Title: "New post",
                         likes: 0,
-                        text: state.newPostText,
+                        text: action.newPostText,
                     },
                 ],
                 newPostText: " ",
@@ -52,26 +50,17 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 userProfile: action.userProfile,
             };
-        case UPDATE_NEWPOST_TA:
-            return {
-                ...state,
-                newPostText: action.txt,
-            };
         case SET_USER_STATUS:
             return {
                 ...state,
-                status: action.status,
+                status: action.status || "here write your status",
             };
         default:
             return state;
     }
 };
 
-export const AddPostCreator = () => ({ type: ADD_POST_TA });
-export const UpdateNewpostCreator = (text) => ({
-    type: UPDATE_NEWPOST_TA,
-    txt: text,
-});
+export const AddPost = (newPostText) => ({ type: ADD_POST_TA, newPostText: newPostText });
 export const setUserProfile = (userProfile) => ({ type: SET_USER_PROFILE_TA, userProfile: userProfile });
 export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status: status });
 

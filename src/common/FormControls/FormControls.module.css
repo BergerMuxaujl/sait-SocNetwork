@@ -1,0 +1,10 @@
+.wrapper {
+    width: 100%;
+}
+textarea.error {
+    border: 2px solid red;
+}
+
+.errorMessage {
+    color: red;
+}

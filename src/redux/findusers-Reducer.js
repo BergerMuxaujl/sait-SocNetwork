@@ -15,40 +15,43 @@ let initialState = {
     currentPage: 1,
     isFetching: true,
     followButtons: [],
+    fake: 10,
 };
 
 let findUsersReducer = (state = initialState, action) => {
     switch (action.type) {
-        case followAT: {
+        case "Fake":
+            return { ...state, fake: state.fake + 1 };
+
+        case followAT:
             return {
                 ...state,
                 users: state.users.map((user) => (user.id === action.userId ? { ...user, followed: true } : user)),
             };
-        }
-        case unfollowAT: {
+
+        case unfollowAT:
             return {
                 ...state,
                 users: state.users.map((user) => (user.id === action.userId ? { ...user, followed: false } : user)),
             };
-        }
-        case setUsersAT: {
+        case setUsersAT:
             return { ...state, users: action.users };
-        }
-        case setTotalUsersCountAT: {
+
+        case setTotalUsersCountAT:
             return { ...state, totalUsersCount: action.totalUsersCount };
-        }
-        case setCurrentPageAT: {
+
+        case setCurrentPageAT:
             return { ...state, currentPage: action.currentPage };
-        }
-        case togleFetchingAT: {
+
+        case togleFetchingAT:
             return { ...state, isFetching: action.isFetching };
-        }
-        case togleFollowAT: {
+
+        case togleFollowAT:
             return {
                 ...state,
                 followButtons: action.isFetching ? [state.followButtons.filter((id) => ~id != action.userId)] : [...state.followButtons, action.userId],
             };
-        }
+
         default:
             return state;
     }
@@ -62,10 +65,10 @@ export let setCurrentPage = (currentPage) => ({ type: setCurrentPageAT, currentP
 export let togleFetching = (isFetching) => ({ type: togleFetchingAT, isFetching: isFetching });
 export let togleFollow = (isFetching, userId) => ({ type: togleFollowAT, isFetching: isFetching, userId: userId });
 
-export let getUsers = (currentPage, countUsersPage) => {
+export let requestUsers = (currentPage, countUsersPage) => {
     return (dispatch) => {
         dispatch(togleFetching(true));
-        usersAPI.getUsers(currentPage, countUsersPage).then((response) => {
+        usersAPI.requestUsers(currentPage, countUsersPage).then((response) => {
             dispatch(setCurrentPage(currentPage));
             dispatch(setUsers(response.items));
             dispatch(setTotalUsersCount(response.totalCount));

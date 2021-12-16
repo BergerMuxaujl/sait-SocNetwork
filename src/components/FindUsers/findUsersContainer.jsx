@@ -1,18 +1,18 @@
 import { connect } from "react-redux";
-import { follow, setCurrentPage, setTotalUsersCount, setUsers, togleFetching, unfollow, togleFollow, getUsers } from "./../../redux/findusers-Reducer";
+import { follow, setCurrentPage, setTotalUsersCount, setUsers, togleFetching, unfollow, togleFollow, requestUsers } from "./../../redux/findusers-Reducer";
+
 import FindUsers from "./findUsers";
 import React from "react";
 import Preloader from "./preloader";
-import { withAuthRedirect } from "../../hoc/auth-Redirect";
-import { compose } from "redux";
+import { getCountUsersPage, getCurrentPage, getFollowButtons, getIsFetching, getTotalUsersCount, getUsersSelector } from "../../redux/findusers-selectors";
 
 class FindUsersAPIComponent extends React.Component {
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.countUsersPage);
+        this.props.requestUsers(this.props.currentPage, this.props.countUsersPage);
     }
 
     onPageChanged = (numPage) => {
-        this.props.getUsers(numPage, this.props.countUsersPage);
+        this.props.requestUsers(numPage, this.props.countUsersPage);
     };
 
     render() {
@@ -40,25 +40,22 @@ class FindUsersAPIComponent extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: state.findusersPage.users,
-        totalUsersCount: state.findusersPage.totalUsersCount,
-        countUsersPage: state.findusersPage.countUsersPage,
-        currentPage: state.findusersPage.currentPage,
-        isFetching: state.findusersPage.isFetching,
-        followButtons: state.findusersPage.followButtons,
+        users: getUsersSelector(state),
+        totalUsersCount: getTotalUsersCount(state),
+        countUsersPage: getCountUsersPage(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followButtons: getFollowButtons(state),
     };
 };
 
-export default compose(
-    connect(mapStateToProps, {
-        follow,
-        unfollow,
-        setUsers,
-        setTotalUsersCount,
-        setCurrentPage,
-        togleFetching,
-        togleFollow,
-        getUsers,
-    }),
-    withAuthRedirect
-)(FindUsersAPIComponent);
+export default connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setUsers,
+    setTotalUsersCount,
+    setCurrentPage,
+    togleFetching,
+    togleFollow,
+    requestUsers,
+})(FindUsersAPIComponent);

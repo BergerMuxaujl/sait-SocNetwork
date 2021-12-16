@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./ProfileInfo.module.css";
 import image from "../../../accets/fake-ava.png";
-import ProfileStatus from "./Status/ProfileStatus";
+import ProfileStatusWithHook from "./Status/ProfileStatusWithHook";
 
 const ProfileInfo = (props) => {
     return (
@@ -14,7 +14,8 @@ const ProfileInfo = (props) => {
                     <span className={s.aboutMeContent}>{props.userProfile.aboutMe}</span>
                 </div>
             </div>
-            <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus} />
+            <ProfileStatusWithHook status={props.status} updateUserStatus={props.updateUserStatus} />
+            {/* <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus} /> */}
         </div>
     );
 };

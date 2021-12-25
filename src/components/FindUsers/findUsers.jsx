@@ -2,8 +2,6 @@ import s from "./findUsers.module.css";
 import image from "../../accets/fake-ava.png";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
-import { usersAPI } from "../../api/api";
 
 const FindUsers = (props) => {
     let countPages = Math.ceil(props.totalUsersCount / props.countUsersPage);
@@ -15,6 +13,7 @@ const FindUsers = (props) => {
 
     return (
         <div className={s.wrapperUsers}>
+            {/* Pagination */}
             <div className={s.pagesButton}>
                 {pages.map((num) => {
                     return (
@@ -29,6 +28,8 @@ const FindUsers = (props) => {
                     );
                 })}
             </div>
+
+            {/* Users */}
             {props.users.map((user) => (
                 <div key={user.id} className={s.wrapperUser}>
                     <div className={s.avaWrapper}>

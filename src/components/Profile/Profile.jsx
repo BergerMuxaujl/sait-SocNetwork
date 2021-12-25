@@ -3,10 +3,10 @@ import s from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./My Posts/MyPostsContainer";
 
-const Profile = (props) => {
+const Profile = ({ userProfile, status, updateUserStatus }) => {
     return (
         <div className={s.content}>
-            <ProfileInfo userProfile={props.userProfile} status={props.status} updateUserStatus={props.updateUserStatus} />
+            <ProfileInfo userProfile={userProfile} status={status} updateUserStatus={updateUserStatus} />
             <MyPostsContainer />
         </div>
     );

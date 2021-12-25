@@ -7,9 +7,9 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 
-setInterval(() => {
-    store.dispatch({ type: "Fake" });
-}, 1000);
+// setInterval(() => {
+//     store.dispatch({ type: "Fake" });
+// }, 1000);
 
 ReactDOM.render(
     <BrowserRouter>

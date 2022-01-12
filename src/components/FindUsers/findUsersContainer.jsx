@@ -1,10 +1,11 @@
 import { connect } from "react-redux";
 import { follow, setCurrentPage, setTotalUsersCount, setUsers, togleFetching, unfollow, togleFollow, requestUsers } from "./../../redux/findusers-Reducer";
-
-import FindUsers from "./findUsers";
+import s from "./findUsers.module.css";
 import React from "react";
 import Preloader from "./preloader";
 import { getCountUsersPage, getCurrentPage, getFollowButtons, getIsFetching, getTotalUsersCount, getUsersSelector } from "../../redux/findusers-selectors";
+import Paginator from "./paginator";
+import Users from "./Users";
 
 class FindUsersAPIComponent extends React.Component {
     componentDidMount() {
@@ -18,21 +19,20 @@ class FindUsersAPIComponent extends React.Component {
     render() {
         return (
             <>
-                {this.props.isFetching ? (
-                    <Preloader preloaderImg="../../accets/fake-ava.png" preloaderStyle={{ width: "120px" }} />
-                ) : (
-                    <FindUsers
-                        totalUsersCount={this.props.totalUsersCount}
-                        countUsersPage={this.props.countUsersPage}
+                <div className={s.wrapperUsers}>
+                    <Paginator
                         onPageChanged={this.onPageChanged}
                         currentPage={this.props.currentPage}
-                        users={this.props.users}
-                        unfollow={this.props.unfollow}
-                        follow={this.props.follow}
-                        togleFollow={this.props.togleFollow}
-                        followButtons={this.props.followButtons}
+                        totalUsersCount={this.props.totalUsersCount}
+                        countUsersPage={this.props.countUsersPage}
+                        portionSize={10}
                     />
-                )}
+                    {this.props.isFetching ? (
+                        <Preloader preloaderImg="../../accets/fake-ava.png" preloaderStyle={{ width: "120px" }} />
+                    ) : (
+                        <Users users={this.props.users} followButtons={this.props.followButtons} unfollow={this.props.unfollow} follow={this.props.follow} />
+                    )}
+                </div>
             </>
         );
     }

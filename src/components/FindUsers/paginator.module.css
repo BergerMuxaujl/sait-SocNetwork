@@ -1,0 +1,12 @@
+.pagesButton {
+    padding-bottom: 15px;
+    text-align: center;
+}
+.pageButton {
+    color: grey;
+    margin-right: 5px;
+}
+.pageButtonCurrent.pageButton {
+    color: red;
+    font-weight: bold;
+}

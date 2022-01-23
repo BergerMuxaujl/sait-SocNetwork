@@ -3,6 +3,7 @@ import { profileAPI } from "../api/api";
 const ADD_POST_TA = "ADD-POST";
 const SET_USER_PROFILE_TA = "SET-USER-PROFILE";
 const SET_USER_STATUS = "SET-USER-STATUS";
+const UPDATE_AVA = "UPDATE-AVA";
 
 let initialState = {
     posts: [
@@ -55,6 +56,12 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 status: action.status || "here write your status",
             };
+        case UPDATE_AVA:
+            return {
+                ...state,
+                userProfile: { ...state.userProfile, photos: action.photos },
+            };
+
         default:
             return state;
     }
@@ -63,6 +70,7 @@ const profileReducer = (state = initialState, action) => {
 export const AddPost = (newPostText) => ({ type: ADD_POST_TA, newPostText: newPostText });
 export const setUserProfile = (userProfile) => ({ type: SET_USER_PROFILE_TA, userProfile: userProfile });
 export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status: status });
+export const saveAvaSuccess = (photos) => ({ type: UPDATE_AVA, photos: photos });
 
 export const getUserProfile = (userId) => {
     return (dispatch) => {
@@ -85,6 +93,16 @@ export const updateUserStatus = (status) => {
         profileAPI.updateUserStatus(status).then((response) => {
             if (response.data.resultCode === 0) {
                 dispatch(setUserStatus(status));
+            }
+        });
+    };
+};
+
+export const saveAva = (file) => {
+    return (dispatch) => {
+        profileAPI.uploadPhoto(file).then((response) => {
+            if (response.resultCode === 0) {
+                dispatch(saveAvaSuccess(response.data.photos));
             }
         });
     };

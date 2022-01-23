@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import Profile from "./Profile";
-import { getUserProfile, getUserStatus, updateUserStatus } from "./../../redux/profile-Reducer";
-import { Redirect, withRouter } from "react-router";
+import { getUserProfile, getUserStatus, updateUserStatus, saveAva } from "./../../redux/profile-Reducer";
+import { withRouter } from "react-router";
 import Preloader from "../FindUsers/preloader";
 import { compose } from "redux";
 
@@ -19,8 +19,12 @@ class ProfileAPIContainer extends React.Component {
         this.props.getUserProfile(userId);
         this.props.getUserStatus(userId);
     }
+    calcIsOwner() {
+        return !this.props.match.params.userId || this.props.match.params.userId === this.props.myId;
+    }
+
     render() {
-        return !this.props.userProfile ? <Preloader /> : <Profile {...this.props} />;
+        return !this.props.userProfile ? <Preloader /> : <Profile {...this.props} isOwner={this.calcIsOwner()} />;
     }
 }
 
@@ -33,4 +37,4 @@ let mapStateToProps = (state) => {
     };
 };
 
-export default compose(connect(mapStateToProps, { getUserProfile, getUserStatus, updateUserStatus }), withRouter)(ProfileAPIContainer);
+export default compose(connect(mapStateToProps, { getUserProfile, getUserStatus, updateUserStatus, saveAva }), withRouter)(ProfileAPIContainer);

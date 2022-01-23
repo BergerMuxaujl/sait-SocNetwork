@@ -2,12 +2,13 @@ import React from "react";
 import s from "./ProfileInfo.module.css";
 import image from "../../../accets/fake-ava.png";
 import ProfileStatusWithHook from "./Status/ProfileStatusWithHook";
+import Ava from "./Ava/Ava";
 
-const ProfileInfo = ({ userProfile, status, updateUserStatus }) => {
+const ProfileInfo = ({ userProfile, status, updateUserStatus, isOwner, saveAva }) => {
     return (
         <div className={s.profileInfo}>
             <div className={s.userWrapper}>
-                <img src={userProfile.photos.small || image} alt="ava" className={s.userAva} />
+                <Ava photoSmall={userProfile.photos.small} isOwner={isOwner} saveAva={saveAva} />
                 <div className={s.userInfo}>
                     <div className={s.fullName}>{userProfile.fullName}</div>
                     <div className={s.aboutMe}>About me: </div>
